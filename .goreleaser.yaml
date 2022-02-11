@@ -1,0 +1,59 @@
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: oslatlong
+    main: ./cmd/oslatlong
+    binary: oslatlong
+
+    env:
+      - CGO_ENABLED=0
+
+    goos:
+      - linux
+      - windows
+      - darwin
+      - freebsd
+
+    goarch:
+      - amd64
+      - arm
+      - arm64
+
+    goarm:
+      - 6
+      - 7
+
+    ignore:
+      - goos: darwin
+        goarch: 386
+
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+
+brews:
+  - tap:
+      owner: oogali
+      name: homebrew-oslatlong
+    folder: Formula
+    homepage: "https://github.com/oogali/oslatlong"
+    description: "OSM Nominatim skinny CLI"
