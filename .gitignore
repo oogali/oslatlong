@@ -34,3 +34,5 @@ dist/
 
 # Annoying plugins
 .idea/aws.xml
+
+dist/
