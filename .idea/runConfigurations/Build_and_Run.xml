@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Build and Run" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="oslatlong" />
+    <working_directory value="$PROJECT_DIR$" />
+    <parameters value="-n 1 &quot;Berlin, Germany&quot;" />
+    <kind value="FILE" />
+    <package value="github.com/oogali/oslatlong" />
+    <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$/cmd/oslatlong/main.go" />
+    <method v="2" />
+  </configuration>
+</component>
