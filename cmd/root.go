@@ -24,6 +24,7 @@ var (
 			}
 
 			maxResults := viper.GetInt("max-results")
+			showQuery := viper.GetBool("show-query")
 
 			for _, q := range queries {
 				n := nominatim.Nominatim{}
@@ -41,7 +42,13 @@ var (
 				}
 
 				for _, result := range results {
-					fmt.Printf("%s | (%s, %s)\n", q, result.LatStr, result.LngStr)
+					line := ""
+					if showQuery {
+						line += fmt.Sprintf("%s | ", q)
+					}
+
+					line += fmt.Sprintf("(%s, %s)", result.LatStr, result.LngStr)
+					fmt.Println(line)
 				}
 			}
 
@@ -59,7 +66,7 @@ func init() {
 	rootCmd.PersistentFlags().IntP("max-results", "n", 0, "Maximum number of results to return")
 	viper.BindPFlag("max-results", rootCmd.PersistentFlags().Lookup("max-results"))
 
-	rootCmd.PersistentFlags().IntP("show-query", "s", 0, "Prefix results with query")
+	rootCmd.PersistentFlags().BoolP("show-query", "s", false, "Prefix results with query")
 	viper.BindPFlag("show-query", rootCmd.PersistentFlags().Lookup("show-query"))
 }
 
